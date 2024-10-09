@@ -112,6 +112,19 @@ const remove = async (req, res) => {
     }
 }
 
+const removeAllData = async (req, res) => {
+    try {
+        let user = req.profile
+        let deleteSupplements = await Supplement.deleteMany()
+        deleteSupplements.hashed_password = undefined
+        deleteSupplements.salt = undefined
+        res.json(deleteSupplements)
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        })
+    }
+}
 
 
 export default { create, userByID, read, list, remove, update, removeAllData }
