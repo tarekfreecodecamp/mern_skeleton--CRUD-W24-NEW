@@ -10,8 +10,9 @@ import userCtrl from '../controllers/supplement.controller.js'
  router.route('/api/users/:userId').delete(userCtrl.remove)
 
  //assignment code
- router.route('/store/supplements').get(supplementController.list)
- router.route('/store/supplements').post(supplementController.create)
- router.route('/store/supplements/:id').get(supplementController.userByID)
- router.route('/store/supplements/:id').delete(supplementController.remove)
+ router.route('/store/supplements').get(supplementController.list)  // get all supplements
+ router.route('/store/supplements/:id').get(supplementController.userByID) // get supplements by id
+ router.route('/store/supplements').post(supplementController.create)    // add new supplement
+ router.route('/store/supplements/:id').delete(supplementController.remove) // delete supplement by id
+ router.route('/store/supplements').delete(supplementController.removeAllData) // delete all supplement
  export default router
