@@ -36,20 +36,40 @@ const list = async (req, res) => {
         })
     }
 }
-const userByID = async (req, res, next, id) => {
-    try {
+// const userByID = async (req, res, next, id) => {
+//     try {
         
 
-        let supplements = await Supplement.findById(id)
-        if (!supplements)
-            return res.status('400').json({
-                error: "User not found"
-            })
+//         let supplements = await Supplement.findById(id)
+//         if (!supplements)
+//             return res.status('400').json({
+//                 error: "User not found"
+//             })
             
-        req.profile = supplements
-        next()
+//         req.profile = supplements
+//         next()
+//     } catch (err) {
+//         return res.status('400').json({
+//             error: "Could not retrieve supplement"
+//         })
+//     }
+// }
+
+
+const userByID = async (req, res) => {
+    try {
+        
+        const getID = req.body   
+        let supplements = await Supplement.findById(getID)
+        if (!supplements) {
+            return res.status(404).json({ error: 'supplements not found' });
+            }
+            res.status(200).res.json(supplements);
+
+        
+       console.log(supplements)
     } catch (err) {
-        return res.status('400').json({
+        return res.status(400).json({
             error: "Could not retrieve supplement"
         })
     }
